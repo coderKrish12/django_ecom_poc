@@ -10,8 +10,10 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 # Create your views here.
 
-class UserRegistrationView(APIView):    
-    def post(self, request, format=None):
+class UserRegistrationView(APIView):  
+    authentication_classes = []
+    permission_classes = []
+    def post(self, request, format=None):   
         serializer = UserRegistrationSerializer(data=request.data)
         serializer.is_valid(raise_exception=True) 
         user = serializer.save()
@@ -21,6 +23,8 @@ class UserRegistrationView(APIView):
 
 
 class UserLoginView(APIView):
+    authentication_classes = []
+    permission_classes = []
     def post(self, request, format=None):
         serializer = UserLoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
